@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>个人主页信息</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+
+      <style>
+        #navbar{
+            top: 10px;
+        }
+        td>img{
+            width:20px;
+            height:20px;
+        }
+      </style>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+          </button>
+          <a class="navbar-brand" href="#">个人主页信息</a>
+
+        </div>
+          <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <a href="{% url 'add' %}" class="btn btn-success">添加信息</a>
+          </form>
+        </div>
+
+
+      </div>
+    </nav>
+    <div class="container" id="content">
+        <div class="row">
+
+
+    <table class="table table-hover text-center">
+        <br><br><br><br><br>
+        <tr>
+            <td><strong>头像</strong></td>
+            <td><strong>姓名</strong></td>
+            <td><strong>专业</strong></td>
+            <td><strong>同学</strong></td>
+            <td><strong>家乡</strong></td>
+            <td><strong>学校</strong></td>
+            <td><strong>修改</strong></td>
+            <td><strong>删除</strong></td>
+            <td><strong>查看主页</strong></td>
+        </tr>
+        {% for foo in infos %}
+        <tr>
+            <td><img src="{% static 'wf.png' %}" alt=""></td>
+            <td>{{ foo.name }}</td>
+            <td>{{ foo.job }}</td>
+            <td>{{ foo.classmate }}</td>
+            <td>{{ foo.home }}</td>
+            <td>{{ foo.school }}</td>
+            <td>
+                <a href="{% url 'up' %}?id={{ foo.id }}">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'del' %}?id={{ foo.id }}">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'chak' %}?id={{ foo.id }}">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+            </div>
+    </div>
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
